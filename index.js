@@ -5,7 +5,7 @@ var useragent = require('express-useragent');
 const crypto = require('crypto');
 
 const clickupak = process.env.clickupak;
-const clickupwhk = process.env.clickupwhk;
+const clickupwhs = process.env.clickupwhs;
 
 app.use(useragent.express());
 app.use(bodyParser.json());    
@@ -27,7 +27,7 @@ app.all('/clickup-assign', (req, res) => {
     console.log("X-Signature:",req.get('X-Signature'));
     var body = JSON.stringify(req.body);
     console.log("body:",body);
-    const hash = crypto.createHmac('sha256', clickupwhk).update(body);
+    const hash = crypto.createHmac('sha256', clickupwhs).update(body);
     const signature = hash.digest('hex');
     console.log("hash:",hash);
     console.log("signature:",signature);
