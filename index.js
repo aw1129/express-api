@@ -15,8 +15,8 @@ app.all('/', (req, res) => {
     console.log("Just got a request!",ip,"param:",req.params,"body:");
     console.dir(req.body, { depth: null });
     console.log("X-Signature:",req.get('X-Signature'));
-    var body = req.body;
-    
+    var body = JSON.stringify(req.body);
+    console.log("body:",body);
     const hash = crypto.createHmac('sha256', clickupak).update(body);
     const signature = hash.digest('hex');
     console.log("hash:",hash);
